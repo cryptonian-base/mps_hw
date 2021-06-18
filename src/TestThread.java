@@ -4,7 +4,8 @@ public class TestThread extends Thread {
     Barrier bar;
     int[] log;
     int index;
-    public TestThread(int index, int threads, int rounds, Barrier bar, int[] log) {
+    public TestThread(int index, int threads, int rounds, 
+                      Barrier bar, int[] log) {
       this.threads = threads;
       this.rounds = rounds;
       this.bar = bar;
@@ -19,7 +20,7 @@ public class TestThread extends Thread {
         bar.await();  // let writers finish
         for (int i = 0; i < threads; i++) {
           if (log[i] != round) {
-            System.out.format("%d\tError expected %d found %d at %d\n", index, round, log[i], i);
+            System.out.format("[index:%d]\tError expected [round:%d] but found [%d] at [thread:%d]\n", index, round, log[i], i);
           }
         }
         bar.await();  // let readers finish
